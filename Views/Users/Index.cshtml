@@ -1,0 +1,26 @@
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+<table class="table table-sm table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach(var user in Model)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>
+                <a asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                <a asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
