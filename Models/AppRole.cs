@@ -4,5 +4,7 @@ namespace IdentityApp.Models;
 
 public class AppRole: IdentityRole
 {
+    private readonly AppRole;
+    
     
 }
