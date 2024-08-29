@@ -1,4 +1,4 @@
-@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@model IEnumerable<AppUser>
 
 <a clas="btn btn-primary" asp-action="Create">Create User</a>
 <hr/>
@@ -16,7 +16,7 @@
     {
         <tr>
             <td>@user.Id</td>
-            <td>@user.UserName</td>
+            <td>@user.FullName</td>
             <td>@user.Email</td>
             <td>
                 <a asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |

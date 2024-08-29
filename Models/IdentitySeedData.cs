@@ -5,7 +5,7 @@ namespace IdentityApp.Models;
 
 public static class IdentitySeedData
 {
-    private const string adminUser = "Admin";
+    private const string adminUser = "admin";
     
     private const string adminPassword = "Admin_1234";
 
@@ -18,14 +18,15 @@ public static class IdentitySeedData
             context.Database.Migrate();
         }
         
-        var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(); //servis sağlayıcısından UserManager sınıfını alıyoruz
+        var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<AppUser>>(); //servis sağlayıcısından UserManager sınıfını alıyoruz
 
         var user = await userManager.FindByNameAsync(adminUser); //kullanıcı adına göre kullanıcıyı arıyoruz
 
         if (user == null)
         {
-            user = new IdentityUser
+            user = new AppUser
             {
+                FullName = "Merve Ekşi",
                 UserName = adminUser,
                 Email = "admin@merveeksi.com",
                 PhoneNumber = "555 444 33 22"

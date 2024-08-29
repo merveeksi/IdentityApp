@@ -8,12 +8,12 @@ namespace IdentityApp.Controllers;
 public class UsersController:Controller
 {
     //sayfa üzerinde artık userManager nesnesine erişebiliriz.
-    public UsersController(UserManager<IdentityUser> userManager)
+    public UsersController(UserManager<AppUser> userManager)
     {
         _userManager = userManager;
     }
    
-    private UserManager<IdentityUser> _userManager;
+    private UserManager<AppUser> _userManager;
     
     public IActionResult Index()
     {

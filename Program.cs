@@ -22,7 +22,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
     
     options.User.RequireUniqueEmail = true; //email adreslerinin unique olmasını sağlar, başka bir kullanıcı aynı email adresi ile kayıt olamaz
-    options.User.AllowedUserNameCharacters = "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHİIJKLMNOÖPRSŞTUÜVYZ0123456789-._"; //kullanıcı adı için geçerli karakterler
+    options.User.AllowedUserNameCharacters = "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHİIJKLMNOÖPRSŞTUÜVYZ0123456789-._@"; //kullanıcı adı için geçerli karakterler
 });
 
 var app = builder.Build();

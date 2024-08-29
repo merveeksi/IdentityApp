@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityApp.Models;
 
-public class IdentityContext:IdentityDbContext<IdentityUser> //kullanıcı bilgilerini tutan tablo
+public class IdentityContext:IdentityDbContext<AppUser, AppRole, string> //kullanıcı bilgilerini tutan tablo
 {
     public IdentityContext(DbContextOptions<IdentityContext> options):base(options) // veritabanı bağlantısı //dışarıdan gelen options parametresini base sınıfına gönderiyoruz
     {
