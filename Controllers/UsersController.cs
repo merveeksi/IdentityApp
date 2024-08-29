@@ -1,3 +1,4 @@
+using IdentityApp.Models;
 using IdentityApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,11 @@ public class UsersController:Controller
     {
         if (ModelState.IsValid)
         {
-            var user = new IdentityUser
+            var user = new AppUser
             {
-                UserName = model.UserName,
-                Email = model.Email
+                UserName = model.Email,
+                Email = model.Email,
+                FullName = model.FullName
             };
             
             IdentityResult result = await _userManager.CreateAsync(user, model.Password); //kullanıcıyı oluşturur
