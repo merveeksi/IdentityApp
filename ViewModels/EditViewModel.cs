@@ -4,6 +4,7 @@ namespace IdentityApp.ViewModels;
 
 public class EditViewModel
 {
+    public string? Id { get; set; }
     public string? FullName { get; set; } = string.Empty; 
     
     [EmailAddress]
@@ -15,6 +16,5 @@ public class EditViewModel
     [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "Parola eşleşmiyor.")] //karşılaştırma yapar
     public string? ConfirmPassword { get; set; } = string.Empty;
-
-    public object Id { get; set; }
+    
 }

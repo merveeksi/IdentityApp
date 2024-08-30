@@ -68,5 +68,44 @@ public class UsersController:Controller
         }
         return RedirectToAction("Index");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Edit(string id, EditViewModel model)
+    {
+        if (id != model.Id)
+        {
+            return RedirectToAction("Index");
+        }
+        
+        if (ModelState.IsValid)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+            if (user != null)
+            {
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+                
+                var result = await _userManager.UpdateAsync(user);
+                
+                if(result.Succeeded && !string.IsNullOrEmpty(model.Password))
+                {
+                    await _userManager.RemovePasswordAsync(user);
+                    await _userManager.AddPasswordAsync(user, model.Password);
+                }
+                
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                
+                foreach (IdentityError err in result.Errors)
+                {
+                    ModelState.AddModelError("", err.Description);
+                }
+                
+            }
+        }
+        return View(model);
+    }
 }
 
