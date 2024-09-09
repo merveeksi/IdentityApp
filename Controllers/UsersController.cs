@@ -68,7 +68,7 @@ public class UsersController:Controller
         }
         return RedirectToAction("Index");
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Edit(string id, EditViewModel model)
     {
@@ -76,7 +76,7 @@ public class UsersController:Controller
         {
             return RedirectToAction("Index");
         }
-        
+
         if (ModelState.IsValid)
         {
             var user = await _userManager.FindByIdAsync(model.Id.ToString());
@@ -84,28 +84,40 @@ public class UsersController:Controller
             {
                 user.FullName = model.FullName;
                 user.Email = model.Email;
-                
+
                 var result = await _userManager.UpdateAsync(user);
-                
-                if(result.Succeeded && !string.IsNullOrEmpty(model.Password))
+
+                if (result.Succeeded && !string.IsNullOrEmpty(model.Password))
                 {
                     await _userManager.RemovePasswordAsync(user);
                     await _userManager.AddPasswordAsync(user, model.Password);
                 }
-                
+
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
-                
+
                 foreach (IdentityError err in result.Errors)
                 {
                     ModelState.AddModelError("", err.Description);
                 }
-                
+
             }
         }
+
         return View(model);
     }
+
+    [HttpPost] 
+    public async Task<IActionResult> Delete(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+            return RedirectToAction("Index"); 
+        }
 }
 
