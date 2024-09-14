@@ -16,5 +16,7 @@ public class EditViewModel
     [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "Parola eşleşmiyor.")] //karşılaştırma yapar
     public string? ConfirmPassword { get; set; } = string.Empty;
+
+    public IList<string>? SelectedRoles { get; set; } //hiçbir rol seçmemiş olabiliriz
     
 }
