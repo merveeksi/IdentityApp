@@ -34,7 +34,7 @@ public class UsersController:Controller
         {
             var user = new AppUser
             {
-                UserName = model.Email,
+                UserName = model.UserName,
                 Email = model.Email,
                 FullName = model.FullName
             };
@@ -63,7 +63,7 @@ public class UsersController:Controller
         if (user != null)
         {
             //rolleri getirir
-            ViewBag.Roles = await _roleManager.Roles.Select(i => i.Name).ToListAsync();
+            ViewBag.Roles = await _roleManager.Roles.Select(i => i.Name).ToListAsync(); //sadece rol isimleri gelir
             
             return View(new EditViewModel
             {
@@ -102,7 +102,13 @@ public class UsersController:Controller
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                   await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user)); //kullanıcının rollerini siler
+                   if (model.SelectedRoles != null)
+                   {
+                       await _userManager.AddToRolesAsync(user, model.SelectedRoles); //kullanıcıya yeni rolleri ekler
+                   }
+
+                   return RedirectToAction("Index");
                 }
 
                 foreach (IdentityError err in result.Errors)

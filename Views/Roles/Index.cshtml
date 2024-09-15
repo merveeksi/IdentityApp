@@ -21,10 +21,10 @@
         <tr>
             <td>role.Id</td>
             <td>role.Name</td>
-            <td>kullanıcı listesi</td>
+            <td asp-role-users="@role.Id"></td> <!-- Kullanıcıları listelemek için -->
             <td>
                 <form method="post">
-                    <a class="btn btn-primary btn-sm">Edit</a> 
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@role.Id">Edit</a> 
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>
